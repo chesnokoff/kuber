@@ -3,3 +3,6 @@ server:
 
 file:
   path: ./app.log
+
+message:
+  welcome: "Welcome!"

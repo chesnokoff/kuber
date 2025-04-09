@@ -3,6 +3,7 @@ package org.example.controller;
 import java.util.Map;
 import org.example.dto.LogRequest;
 import org.example.service.LogService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,13 +15,16 @@ public class LogController {
 
   private final LogService logService;
 
-  public LogController(LogService logService) {
+  private final String welcomeMessage;
+
+  public LogController(LogService logService, @Value("${message.welcome}") String welcomeMessage) {
     this.logService = logService;
+    this.welcomeMessage = welcomeMessage;
   }
 
   @GetMapping("/")
   public String welcome() {
-    return "Welcome to the custom app";
+    return welcomeMessage;
   }
 
   @GetMapping("/status")
