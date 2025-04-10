@@ -1,14 +1,14 @@
 server:
-  port: 8085
+  port: ${SERVER_PORT:8085}
 
 file:
-  path: ./app.log
+  path: ${FILE_PATH:./app.log}
 
 message:
-  welcome: "Welcome!"
+  welcome: ${MESSAGE_WELCOME:"Default welcome!"}
 
 logging:
   level:
     org:
       springframework:
-        web: INFO
+        web: ${LOG_LEVEL:INFO}
