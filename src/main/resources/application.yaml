@@ -6,3 +6,9 @@ file:
 
 message:
   welcome: "Welcome!"
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
