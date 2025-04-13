@@ -32,7 +32,7 @@ public class LogController {
     return Map.of("status", "ok");
   }
 
-  @PostMapping("/logs")
+  @PostMapping("/log")
   public void writeLog(@RequestBody LogRequest request) {
     logService.writeLog(request.message());
   }
