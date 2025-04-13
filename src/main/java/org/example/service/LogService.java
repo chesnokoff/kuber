@@ -34,7 +34,7 @@ public class LogService {
     }
 
     try {
-      Files.writeString(filePath, message, CREATE, APPEND);
+      Files.writeString(filePath, message + "\n", CREATE, APPEND);
     } catch (IOException e) {
       throw new LogServiceException("Failed to write log: ", e);
     } finally {
