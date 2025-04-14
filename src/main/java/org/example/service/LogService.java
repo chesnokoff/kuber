@@ -18,8 +18,8 @@ public class LogService {
 
   ReentrantReadWriteLock reentrantLock = new ReentrantReadWriteLock();
 
-  public LogService(@Value("${file.path}") Path filePath) {
-    this.filePath = filePath;
+  public LogService(@Value("${file.path}") Path filePath) throws IOException {
+    this.filePath = Files.createFile(filePath).toAbsolutePath();
   }
 
   public void writeLog(String message) {
@@ -34,7 +34,7 @@ public class LogService {
     }
 
     try {
-      Files.writeString(filePath, message + "\n", CREATE, APPEND);
+      Files.writeString(filePath, message + "\n", APPEND);
     } catch (IOException e) {
       throw new LogServiceException("Failed to write log: ", e);
     } finally {

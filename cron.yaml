@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: log-compress
+spec:
+  schedule: "*/10 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: log-compress
+              image: busybox
+              command: [ "/bin/sh", "-c" ]
+              args:
+                - |
+                  TIME=$(date +%Y%m%d%H%M%S)
+                  tar -czf /tmp/app-logs-${TIME}.tar.gz /app/logs/
+                  echo "Compressed"
+                  sleep 60
+              volumeMounts:
+                - name: log-volume
+                  mountPath: /app/logs
+                - name: tmp-volume
+                  mountPath: /tmp
+          volumes:
+            - name: log-volume
+              hostPath:
+                path: /var/log/app-logs
+                type: DirectoryOrCreate
+            - name: tmp-volume
+              emptyDir: {}
+          restartPolicy: OnFailure
