@@ -19,12 +19,12 @@ kubectl describe pod app-pod
 
 kubectl port-forward pod/app-pod 8090:8090
 
-#PORT_FORWARD_PID=$!
-#
-#sleep 5
-#
-#curl http://localhost:8090
-#
-#kill $PORT_FORWARD_PID
-#
-#kind delete cluster
+PORT_FORWARD_PID=$!
+
+sleep 5
+
+curl http://localhost:8090
+
+kill $PORT_FORWARD_PID
+
+kind delete cluster
