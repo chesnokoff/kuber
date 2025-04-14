@@ -4,6 +4,6 @@ metadata:
   name: app-config
 data:
   SERVER_PORT: "8090"
-  FILE_PATH: "./app.log"
+  FILE_PATH: "/app/logs/app.log"
   MESSAGE_WELCOME: "Hello, Kuber!"
   LOG_LEVEL: "DEBUG"
