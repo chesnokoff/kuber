@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  SERVER_PORT: "8090"
+  FILE_PATH: "./app.log"
+  MESSAGE_WELCOME: "Hello, Kuber!"
+  LOG_LEVEL: "DEBUG"
