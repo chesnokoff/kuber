@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+spec:
+  containers:
+  - name: app
+    image: chesnokoff/app:v1
+    ports:
+    - containerPort: 8090
+    envFrom:
+    - configMapRef:
+        name: app-config
+    volumeMounts:
+    - name: logs
+      mountPath: /app/logs
+  volumes:
+  - name: logs
+    emptyDir: {}
