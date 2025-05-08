@@ -1,0 +1,47 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: app-routing
+  namespace: default
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - app-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /log
+      route:
+        - destination:
+            host: log-service
+            port:
+              number: 80
+      retries:
+        attempts: 2
+      fault:
+        delay:
+          fixedDelay: 2s
+          percentage:
+            value: 100.0
+      timeout: 1s
+
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: app-destination
+            port:
+              number: 80
+
+    - route:
+        - destination:
+            host: app-destination
+            port:
+              number: 80
+      fault:
+        abort:
+          httpStatus: 404
+          percentage:
+            value: 100.0
