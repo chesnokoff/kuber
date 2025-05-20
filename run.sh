@@ -28,3 +28,5 @@ kubectl apply -f istio/istio-destinationrule.yaml
 kubectl get virtualservices -n default
 kubectl get gateways -n default
 kubectl get destinationrules -n default
+
+kubectl apply -f prometheus/monitor.yaml
